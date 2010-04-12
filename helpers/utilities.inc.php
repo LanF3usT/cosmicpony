@@ -83,3 +83,12 @@ function _include($files=array()) {
     if(file_exists($file)) include $file;
   }
 }
+
+// Return name with the extension if it didn't have it already
+// Example:
+//   add_extension('foo', 'js') # => 'foo.js'
+//   add_extension('foo.js', 'js') # => 'foo.js'
+function add_extension($nom, $ext) {
+  $ext = '.' . $ext;
+  return (substr($nom, -strlen($ext), strlen($ext)) != $ext) ? $nom.$ext : $nom;
+}
