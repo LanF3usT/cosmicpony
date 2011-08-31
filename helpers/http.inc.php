@@ -117,7 +117,7 @@ function sanitize_redirect($location) {
   return $location;
 }
 
-function redirect($location, $status = 302) {
+function redirect($location, $status = 302, $exit = true) {
   if ( !$location ) // allows the wp_redirect filter to cancel a redirect
     return false;
 
@@ -126,4 +126,6 @@ function redirect($location, $status = 302) {
   if ( php_sapi_name() != 'cgi-fcgi' )
     status_header($status); // This causes problems on IIS and some FastCGI setups
   header("Location: $location");
+  if ( $exit )
+    exit();
 }
